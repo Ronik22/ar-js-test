@@ -1,33 +1,57 @@
 <!DOCTYPE html>
-<html>
-	<script src="https://aframe.io/releases/1.0.0/aframe.min.js"></script>
-	<!-- we import arjs version without NFT but with marker + location based support -->
-	<script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
-	<script src="gesture-detector.js"></script>
-    <script src="gesture-handler.js"></script>
-
-    <body style="margin: 0px; overflow: hidden">
-		<a-scene embedded arjs renderer="logarithmicDepthBuffer: true;"
-      vr-mode-ui="enabled: false" gesture-detector id="scene">
-			<!-- .patt file trained with https://jeromeetienne.github.io/AR.js/three.js/examples/marker-training/examples/generator.html -->
-			<a-marker
-				type="pattern"
-				url="./test.patt"
-				raycaster="objects: .clickable"
-				emitevents="true"
-				cursor="fuse: false; rayOrigin: mouse;"
-				id="markerA"
-			>
-				<!-- we use cors proxy to avoid cross-origin problems ATTENTION! you need to set up your server -->
-				<a-entity
-					position="0 0 0"
-					scale="1 1 1"
-					gltf-model="./shiba/scene.gltf"
-                    class="clickable"
-                    gesture-handler
-				></a-entity>
-			</a-marker>
-			<a-entity camera></a-entity>
-		</a-scene>
-	</body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AR JS Test</title>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+        h1 {
+            text-align: center;
+        }
+        .redhead {
+            color: red;
+        }
+        ul {
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        li {
+            background-color: rgb(255, 158, 30);
+            padding: 1em 2em;
+            font-size: 22px;
+            text-align: center;
+            list-style:none;
+            
+        }
+        li:nth-child(even){
+            background-color: rgb(255, 240, 30);
+        }
+        li a {
+            text-decoration: none;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+    <h1><span class="redhead">AR-JS</span> TEST</h1>
+    <ul id="vislist"></ul>
+    <script>
+        const dirList = [
+            "marker",
+            "location",
+        ]
+        const vislist_ul = document.getElementById("vislist")
+        for(var i = 0; i < dirList.length; i++) {
+            const newLi = `<li><a style="text-transform: capitalize" href="${dirList[i]}/index.html">${dirList[i]} Based</a></li>`
+            vislist_ul.innerHTML += newLi
+            console.log(newLi)
+        }
+    </script>
+</body>
 </html>
